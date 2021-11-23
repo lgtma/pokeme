@@ -31,11 +31,13 @@ const WelcomeScreen = () => {
         >
           <img src={LogoV} alt="pokeme" style={{ maxWidth: "120px" }} />
           <div className="text-center text-light mt-4">
-            <h1 className="display-6 text-uppercase text-center mb-4">Welcome to Pokeme</h1>
+            <h1 className="display-6 text-uppercase text-center mb-4">
+              Welcome to Pokeme
+            </h1>
             <p className="mb-3">
-              <span className="lead">A collectible Pokemon cards app.</span>
+              <span className="lead">A collectible Pokemon cards app</span>
               <br />
-              Find and collect your favourite pokemon.
+              Find and collect your favourite pokemon
             </p>
             <Link to="/cards">
               <Button variant="primary" className="text-light">
