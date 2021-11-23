@@ -1,15 +1,56 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 
-import AllCardsPage from "./pages/AllCardsPage";
-import CollectionsPage from "./pages/CollectionsPage";
+import CardsPage from "./pages/CardsPage";
+// import CollectionsPage from "./pages/CollectionsPage";
+import LogoV from "./pokemeLogoV.png";
+
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" exact={true} element={<AllCardsPage />} />
-      <Route path="/collection" element={<CollectionsPage />} />
+      <Route path="/" element={<WelcomeScreen />} />
+      <Route path="/cards/*" element={<CardsPage />} />
     </Routes>
   );
 };
 
+const WelcomeScreen = () => {
+  return (
+    <section className="bg-secondary">
+      <Container>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          <img src={LogoV} alt="pokeme" style={{ maxWidth: "120px" }} />
+          <div className="text-center text-light mt-4">
+            <h1 className="display-6 text-uppercase text-center mb-4">Welcome to Pokeme</h1>
+            <p className="mb-3">
+              <span className="lead">A collectible Pokemon cards app.</span>
+              <br />
+              Find and collect your favourite pokemon.
+            </p>
+            <Link to="/cards">
+              <Button variant="primary" className="text-light">
+                Browse Cards
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+};
+
 export default App;
+
+// domain/ => Welcome screen component
+// domain/cards => Cards listing component
+// domain/cards/:cardId => Card detail component
