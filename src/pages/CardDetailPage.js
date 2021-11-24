@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 
-import PokemonItemDetail from "../components/pokemons/PokemonItemDetail";
+import PokemonCardDetail from "../components/pokemons/PokemonCardDetail";
 
 const CardDetailPage = (cardId) => {
+  
   const params = useParams();
-
   const [isLoading, setIsLoading] = useState(false);
   const [pokemon, setPokemon] = useState(null);
 
@@ -26,12 +26,12 @@ const CardDetailPage = (cardId) => {
   // console.log("isLoading ", isLoading);
 
   return (
-    <section className="my-4">
+    <section className="py-4 bg-light">
       <Container>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
-          pokemon && <PokemonItemDetail pokemon={pokemon} />
+          pokemon && <PokemonCardDetail pokemon={pokemon} />
         )}
       </Container>
     </section>

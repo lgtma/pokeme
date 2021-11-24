@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 
 const CollectionsPage = () => {
   return (
-    <section className="my-4">
+    <section className="py-4 bg-light">
       <Container>
         <h1 className="mb-4 text-uppercase fw-bold">My Collections</h1>
         <ul>

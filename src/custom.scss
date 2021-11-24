@@ -23,8 +23,11 @@ body {
   }
 }
 
-.btn-transparent {
-  &:focus {
-    box-shadow: none;
-  } 
+.btn-transparent:focus {
+  box-shadow: none;
+} 
+
+.is-favorite .icon {
+  color: #e30022;
+  fill: #e30022;
 }

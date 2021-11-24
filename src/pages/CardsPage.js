@@ -55,28 +55,20 @@ const CardsListing = () => {
     fetchPokemons();
   }, [offset]);
 
-  const getNextOffset = () => {
-    setOffset(offset + CARDS_LIMIT);
-  };
-
-  const getPrevOffset = () => {
-    if (offset > 0) {
-      setOffset(offset - CARDS_LIMIT);
-    }
-  };
-
   const handleLoadNext = () => {
-    getNextOffset();
+    setOffset(offset + CARDS_LIMIT);
     console.log("load more offset", offset);
   };
 
   const handleLoadPrev = () => {
-    getPrevOffset();
+    if (offset > 0) {
+      setOffset(offset - CARDS_LIMIT);
+    }
     console.log("load less offset", offset);
   };
 
   return (
-    <section className="my-4">
+    <section className="py-4 bg-light">
       <Container>
         <h1 className="mb-4 text-uppercase fw-bold">Pokemon Cards</h1>
         {isLoading ? (
