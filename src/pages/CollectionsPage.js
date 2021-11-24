@@ -6,7 +6,7 @@ const CollectionsPage = () => {
   return (
     <section className="my-4">
       <Container>
-        <h1 className="mb-4 text-uppercase">My Collections</h1>
+        <h1 className="mb-4 text-uppercase fw-bold">My Collections</h1>
         <ul>
           <li>
             <Link to="/cards/detail/poke1">Poke1</Link>

@@ -6,7 +6,7 @@ import Card from "react-bootstrap/Card";
 import * as Icon from "react-feather";
 
 const PokemonList = (props) => {
-  console.log("PokemonList.props ", props.pokemons);
+  // console.log("PokemonList.props ", props.pokemons);
   return (
     <Row>
       {props.pokemons.map((pokemon) => (
@@ -28,8 +28,9 @@ const PokemonCard = ({ pokemon }) => {
       </Card.Header>
       <Link to={`${pokemon.id}`}>
         <Card.Img
-          variant="top" 
           src={pokemon.sprites["front_default"]}
+          className="d-block m-auto"
+          width="120"
         />
       </Link>
       <Card.Body className="border-top">
@@ -38,16 +39,24 @@ const PokemonCard = ({ pokemon }) => {
         </Card.Title>
         <Card.Text>
           <span className="d-block">
-            Type(s): <span className="text-capitalize">{renderPokeType(pokemon.types)}</span>
+            Type(s):{" "}
+            <span className="text-capitalize">
+              {renderPokeType(pokemon.types)}
+            </span>
           </span>
           <span className="d-block">
-            Experience: <span className="text-warning fw-bold">{pokemon.base_experience}</span>
+            Experience:{" "}
+            <span className="text-warning fw-bold">
+              {pokemon.base_experience}
+            </span>
           </span>
         </Card.Text>
       </Card.Body>
       <Card.Footer className="border-top">
         <div className="d-flex justify-content-end">
-          <Icon.Heart />
+          <button className="btn btn-transparent" onClick={toggleSaveFavorites}>
+            <Icon.Heart />
+          </button>
         </div>
       </Card.Footer>
     </Card>
@@ -61,4 +70,7 @@ const renderPokeType = (types) => {
   return temp.join(", ");
 };
 
+const toggleSaveFavorites = (event) => {
+  console.log('save to favorites', event);
+}
 export default PokemonList;

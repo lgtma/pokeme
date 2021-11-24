@@ -78,7 +78,7 @@ const CardsListing = () => {
   return (
     <section className="my-4">
       <Container>
-        <h1 className="mb-4 text-uppercase">Pokemon Cards</h1>
+        <h1 className="mb-4 text-uppercase fw-bold">Pokemon Cards</h1>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
