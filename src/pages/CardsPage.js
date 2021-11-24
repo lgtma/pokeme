@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
@@ -16,7 +16,7 @@ const CardsPage = () => {
     <Layout>
       <Routes>
         <Route path="/" element={<CardsListing />} />
-        <Route path="/detail/:cardId" element={<CardDetailPage />} />
+        <Route path=":cardId" element={<CardDetailPage />} />
         <Route path="/collections" element={<CollectionsPage />} />
       </Routes>
     </Layout>
@@ -24,11 +24,9 @@ const CardsPage = () => {
 };
 
 const CardsListing = () => {
-
   const [offset, setOffset] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [loadedPokemons, setLoadedPokemons] = useState([]);
-  const hasFetchedData = useRef(false);
 
   useEffect(() => {
     const fetchPokemons = async () => {
@@ -45,28 +43,27 @@ const CardsListing = () => {
           .then((response) => response.json())
           .then((pokedata) => {
             pokemons.push(pokedata);
-            setLoadedPokemons(pokemons.sort( (a, b) => a.id - b.id));
+            setLoadedPokemons(pokemons.sort((a, b) => a.id - b.id));
             if (pokemons.length === CARDS_LIMIT) {
               setIsLoading(false);
             }
           });
       });
 
-      hasFetchedData.current = true;
     };
 
     fetchPokemons();
   }, [offset]);
 
   const getNextOffset = () => {
-    setOffset(offset+CARDS_LIMIT);
-  }
+    setOffset(offset + CARDS_LIMIT);
+  };
 
   const getPrevOffset = () => {
     if (offset > 0) {
-      setOffset(offset-CARDS_LIMIT);
+      setOffset(offset - CARDS_LIMIT);
     }
-  }
+  };
 
   const handleLoadNext = () => {
     getNextOffset();
@@ -76,12 +73,12 @@ const CardsListing = () => {
   const handleLoadPrev = () => {
     getPrevOffset();
     console.log("load less offset", offset);
-  }
+  };
 
   return (
     <section className="my-4">
       <Container>
-        <h1>Pokemon Cards</h1>
+        <h1 className="mb-4 text-uppercase">Pokemon Cards</h1>
         {isLoading ? (
           <p>Loading...</p>
         ) : (
@@ -91,7 +88,6 @@ const CardsListing = () => {
               <Button
                 variant="primary"
                 className="text-light"
-                size="lg"
                 onClick={handleLoadPrev}
                 disabled={offset < 1}
               >
@@ -99,8 +95,7 @@ const CardsListing = () => {
               </Button>
               <Button
                 variant="primary"
-                className="text-light ms-2"
-                size="lg"
+                className="text-light ms-1"
                 onClick={handleLoadNext}
               >
                 Next

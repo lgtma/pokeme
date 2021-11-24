@@ -1,3 +1,4 @@
+
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -9,7 +10,7 @@ const MainNavigation = () => {
     <Navbar bg="secondary" expand="lg" variant="dark">
       <Container>
         <Navbar.Brand href="/">
-          <img src={pokemeLogo} alt="pokeme!" height="40" />
+          <img src={pokemeLogo} alt="pokeme!" height="60" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end">

@@ -1,7 +1,6 @@
 import { Routes, Route, Link } from "react-router-dom";
 
 import CardsPage from "./pages/CardsPage";
-// import CollectionsPage from "./pages/CollectionsPage";
 import LogoV from "./pokemeLogoV.png";
 
 import Button from "react-bootstrap/Button";
@@ -10,7 +9,7 @@ import Container from "react-bootstrap/Container";
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<WelcomeScreen />} />
+      <Route exact path="/" element={<WelcomeScreen />} />
       <Route path="/cards/*" element={<CardsPage />} />
     </Routes>
   );
@@ -21,13 +20,8 @@ const WelcomeScreen = () => {
     <section className="bg-secondary">
       <Container>
         <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-          }}
+          style={{height: "100vh"}}
+          className="d-flex justify-content-center align-items-center flex-column"
         >
           <img src={LogoV} alt="pokeme" style={{ maxWidth: "120px" }} />
           <div className="text-center text-light mt-4">
