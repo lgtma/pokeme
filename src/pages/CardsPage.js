@@ -15,7 +15,7 @@ const CardsPage = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<CardsListing />} />
+        <Route exact path="/" element={<CardsListing />} />
         <Route path=":cardId" element={<CardDetailPage />} />
         <Route path="/collections" element={<CollectionsPage />} />
       </Routes>

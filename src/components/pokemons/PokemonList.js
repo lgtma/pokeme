@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import PokemonCard from "./PokemonCard";
 
 const PokemonList = (props) => {
+  console.log('PokemonList props', props);
   return (
     <Row>
       {props.pokemons.map((pokemon) => (
