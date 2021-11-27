@@ -8,8 +8,7 @@ import Layout from "../components/Layout";
 import CardDetailPage from "./CardDetailPage";
 import CollectionsPage from "./CollectionsPage";
 import PokemonList from "../components/pokemons/PokemonList";
-
-const CARDS_LIMIT = 12;
+import { getAllPokemon, getPokemon } from "../services/pokemon";
 
 const CardsPage = () => {
   return (
@@ -24,51 +23,46 @@ const CardsPage = () => {
 };
 
 const CardsListing = () => {
-  const [offset, setOffset] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [currentPageUrl, setCurrentPageUrl] = useState(
+    `https://pokeapi.co/api/v2/pokemon?limit=12`
+  );
+  const [nextUrl, setNextUrl] = useState("");
+  const [prevUrl, setPrevUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [loadedPokemons, setLoadedPokemons] = useState([]);
 
   useEffect(() => {
     const fetchPokemons = async () => {
-      setIsLoading(true);
+      let response = await getAllPokemon(currentPageUrl);
 
-      const responseData = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=${CARDS_LIMIT}&offset=${offset}`
-      ).then((response) => response.json());
+      setPrevUrl(response.previous);
+      setNextUrl(response.next);
 
-      const pokemons = [];
+      let pokemons = await Promise.all(
+        response.results.map((pokemon) => getPokemon(pokemon.url))
+      );
 
-      responseData.results.forEach((pokemon) => {
-        fetch(pokemon.url)
-          .then((response) => response.json())
-          .then((pokedata) => {
-            pokemons.push(pokedata);
-            setLoadedPokemons(pokemons.sort((a, b) => a.id - b.id));
-            if (pokemons.length === CARDS_LIMIT) {
-              setIsLoading(false);
-            }
-          });
-      });
+      setLoadedPokemons(pokemons);
+      setIsLoading(false);
 
+      // console.log("response.results ", response);
     };
 
     fetchPokemons();
-  }, [offset]);
+  }, [currentPageUrl]);
 
   const handleLoadNext = () => {
-    setOffset(offset + CARDS_LIMIT);
-    console.log("load more offset", offset);
+    setIsLoading(true);
+    setCurrentPageUrl(nextUrl);
   };
 
   const handleLoadPrev = () => {
-    if (offset > 0) {
-      setOffset(offset - CARDS_LIMIT);
-    }
-    console.log("load less offset", offset);
+    setIsLoading(true);
+    setCurrentPageUrl(prevUrl);
   };
 
   return (
-    <section className="py-4 bg-light">
+    <section className="py-4">
       <Container>
         <h1 className="mb-4 text-uppercase fw-bold">Pokemon Cards</h1>
         {isLoading ? (
@@ -81,7 +75,7 @@ const CardsListing = () => {
                 variant="primary"
                 className="text-light"
                 onClick={handleLoadPrev}
-                disabled={offset < 1}
+                disabled={!prevUrl}
               >
                 Prev
               </Button>

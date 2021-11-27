@@ -34,11 +34,12 @@ const PokemonCard = ({ pokemon }) => {
         <Card.Img
           src={pokemon.sprites["front_default"]}
           className="d-block m-auto"
-          width="120"
+          width="100"
+          style={{maxWidth: '100px'}}
         />
       </Link>
       <Card.Body className="border-top">
-        <Card.Title className="text-capitalize">
+        <Card.Title className="text-capitalize h6">
           <strong>{pokemon.name}</strong>
         </Card.Title>
         <Card.Text>
